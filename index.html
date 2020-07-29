@@ -12,13 +12,13 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="pin-generator half-width">
-                    <input class="form-control" type="text">
-                    <button class="generate-btn">Generate Pin</button>
+                    <input id="pin-display" class="form-control" type="text">
+                    <button id="generate-pin" class="generate-btn">Generate Pin</button>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="input-section half-width">
-                    <input class="form-control" type="text">
+                    <input id="input-display" class="form-control" type="text">
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
@@ -42,7 +42,7 @@
                                 <div class="button">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button id="submit-btn" type="submit" class="submit-btn">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                     </div>
@@ -54,5 +54,46 @@
             <p id="notify-right" class="notify">✅ Pin Matched... Secret door is opening for you</p>
         </div>
     </div>
+    <script>
+        document.getElementById("generate-pin").addEventListener("click", function pinGenerator()
+        {
+          let pin = randomNumberGenerate();
+        } )
+            
+        document.getElementById("submit-btn").addEventListener('click', function()
+        {
+            
+            let pin = document.getElementById("pin-display").value;
+            let inputPin = document.getElementById('input-display').value;
+       
+            if(inputPin == pin)
+            {
+                document.getElementById('notify-right').style.display = "block";
+            }
+            else
+            {
+                document.getElementById('notify-wrong').style.display = "block";
+            }
+        })
+
+  
+       
+       function randomNumberGenerate()
+       {
+            const randomNumber = Math.floor(Math.random() *10000);
+            const randomNumberString = randomNumber.toString();
+            if(randomNumberString.length<4)
+            {
+                const randomNumberEdited = randomNumber + 1000;
+                document.getElementById("pin-display").value = randomNumberEdited;
+                return randomNumberEdited;
+            }
+            else{
+                document.getElementById("pin-display").value = randomNumber;
+                return randomNumber;
+            }
+       }
+      
+    </script>
 </body>
 </html>
