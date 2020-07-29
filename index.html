@@ -22,23 +22,23 @@
                     <div class="numbers">
                         <div class="calc-body">
                             <div class="calc-button-row">
-                              <div class="button">7</div>
-                              <div class="button">8</div>
-                              <div class="button">9</div>
+                              <div onclick="keypadInput('7')" class="button">7</div>
+                              <div onclick="keypadInput('8')"  class="button">8</div>
+                              <div onclick="keypadInput('9')"  class="button">9</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">4</div>
-                              <div class="button">5</div>
-                              <div class="button">6</div>
+                              <div onclick="keypadInput('4')"  class="button">4</div>
+                              <div onclick="keypadInput('5')"  class="button">5</div>
+                              <div onclick="keypadInput('6')"  class="button">6</div>
                             </div>
                             <div class="calc-button-row">
-                              <div class="button">1</div>
-                              <div class="button">2</div>
-                              <div class="button">3</div>
+                              <div onclick="keypadInput('1')"  class="button">1</div>
+                              <div onclick="keypadInput('2')"  class="button">2</div>
+                              <div onclick="keypadInput('3')"  class="button">3</div>
                             </div>
                             <div class="calc-button-row">
                                 <div class="button"><</div>
-                                <div class="button">0</div>
+                                <div onclick="keypadInput('0')"  class="button">0</div>
                                 <div class="button">C</div>
                             </div>
                             <div>
@@ -55,11 +55,16 @@
         </div>
     </div>
     <script>
+        //random number is generated and showed in display when generate pin is clicked.
         document.getElementById("generate-pin").addEventListener("click", function pinGenerator()
         {
           let pin = randomNumberGenerate();
+          document.getElementById('input-display').value = "";
+          document.getElementById('notify-right').style.display = "none";
+          document.getElementById('notify-wrong').style.display = "none";
         } )
-            
+        
+        //matching section generated pin is matched with input pin when submit button is clicked.
         document.getElementById("submit-btn").addEventListener('click', function()
         {
             
@@ -74,10 +79,11 @@
             {
                 document.getElementById('notify-wrong').style.display = "block";
             }
-        })
+        }
+        )
 
   
-       
+       //function for generating random number called when generate pin button is clicked.
        function randomNumberGenerate()
        {
             const randomNumber = Math.floor(Math.random() *10000);
@@ -92,6 +98,14 @@
                 document.getElementById("pin-display").value = randomNumber;
                 return randomNumber;
             }
+       }
+
+       function keypadInput(num)
+       {
+           let input = document.getElementById('input-display').value;
+           let inputString = input + num;
+           document.getElementById('input-display').value = inputString;
+           console.log("i am clicked");
        }
       
     </script>
