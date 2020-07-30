@@ -43,7 +43,7 @@
                             </div>
                             <div>
                                 <button id="submit-btn" type="submit" class="submit-btn">Submit</button>
-                                <p class="action-left">3 try left</p>
+                                <p class="action-left"><span id="tryLeftNumber">3</span> try left</p>
                             </div>
                     </div>
                 </div>
@@ -62,23 +62,33 @@
           document.getElementById('input-display').value = "";
           document.getElementById('notify-right').style.display = "none";
           document.getElementById('notify-wrong').style.display = "none";
+          document.getElementById("submit-btn").disabled = false;
+          document.getElementById('tryLeftNumber').innerText = 3;
         } )
         
         //matching section generated pin is matched with input pin when submit button is clicked.
         document.getElementById("submit-btn").addEventListener('click', function()
-        {
-            
+        {   
             let pin = document.getElementById("pin-display").value;
             let inputPin = document.getElementById('input-display').value;
        
             if(inputPin == pin)
             {
                 document.getElementById('notify-right').style.display = "block";
+                document.getElementById('notify-wrong').style.display = "none";
             }
             else
             {
                 document.getElementById('notify-wrong').style.display = "block";
-                document.getElementById('input-display').value = "";
+                //document.getElementById('input-display').value = "";
+                let tryNumber = parseInt(document.getElementById('tryLeftNumber').innerText);
+                tryNumber = tryNumber - 1;
+                document.getElementById('tryLeftNumber').innerText = tryNumber;
+                if(tryNumber == 0)
+                {
+                    document.getElementById("submit-btn").disabled = true;
+                }
+                
             }
         }
         )
