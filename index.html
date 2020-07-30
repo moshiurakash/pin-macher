@@ -37,9 +37,9 @@
                               <div onclick="keypadInput('3')"  class="button">3</div>
                             </div>
                             <div class="calc-button-row">
-                                <div class="button"><</div>
+                                <div onclick="removeLastChar()" class="button"><</div>
                                 <div onclick="keypadInput('0')"  class="button">0</div>
-                                <div class="button">C</div>
+                                <div onclick="clearDisplay()" class="button">C</div>
                             </div>
                             <div>
                                 <button id="submit-btn" type="submit" class="submit-btn">Submit</button>
@@ -78,6 +78,7 @@
             else
             {
                 document.getElementById('notify-wrong').style.display = "block";
+                document.getElementById('input-display').value = "";
             }
         }
         )
@@ -100,12 +101,29 @@
             }
        }
 
+       //function for take keypad input called in every number button html element.
        function keypadInput(num)
        {
-           let input = document.getElementById('input-display').value;
-           let inputString = input + num;
-           document.getElementById('input-display').value = inputString;
-           console.log("i am clicked");
+           let inputString = document.getElementById('input-display').value;
+            if(inputString.length<4)
+            {
+                inputString += num;
+                document.getElementById('input-display').value = inputString;
+            }
+       }
+
+       //remove last character of the input pin
+       function removeLastChar()
+       {
+          const numbers = document.getElementById('input-display').value;
+          const editedNumbers = numbers.slice(0, -1);
+          document.getElementById('input-display').value = editedNumbers;
+       }
+
+       //to clear the input display
+       function clearDisplay()
+       {
+        document.getElementById('input-display').value = "";
        }
       
     </script>
