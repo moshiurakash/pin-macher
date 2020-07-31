@@ -55,10 +55,15 @@
         </div>
     </div>
     <script>
+
         //random number is generated and showed in display when generate pin is clicked.
-        document.getElementById("generate-pin").addEventListener("click", function pinGenerator()
+        //Submit button is enabled.
+        //3 tries are reassigned.
+
+        document.getElementById("generate-pin").addEventListener("click", function()
         {
           let pin = randomNumberGenerate();
+          document.getElementById("pin-display").value = pin;
           document.getElementById('input-display').value = "";
           document.getElementById('notify-right').style.display = "none";
           document.getElementById('notify-wrong').style.display = "none";
@@ -67,6 +72,9 @@
         } )
         
         //matching section generated pin is matched with input pin when submit button is clicked.
+        //If pin do not match try left will decrease one.
+        //If try left number is zero the submit button will disabled.
+
         document.getElementById("submit-btn").addEventListener('click', function()
         {   
             let pin = document.getElementById("pin-display").value;
@@ -80,6 +88,7 @@
             else
             {
                 document.getElementById('notify-wrong').style.display = "block";
+                document.getElementById('notify-right').style.display = "none";
                 //document.getElementById('input-display').value = "";
                 let tryNumber = parseInt(document.getElementById('tryLeftNumber').innerText);
                 tryNumber = tryNumber - 1;
@@ -102,16 +111,14 @@
             if(randomNumberString.length<4)
             {
                 const randomNumberEdited = randomNumber + 1000;
-                document.getElementById("pin-display").value = randomNumberEdited;
                 return randomNumberEdited;
             }
-            else{
-                document.getElementById("pin-display").value = randomNumber;
-                return randomNumber;
-            }
+            return randomNumber;   
        }
 
        //function for take keypad input called in every number button html element.
+       //Will note tale more then 4 digits.
+
        function keypadInput(num)
        {
            let inputString = document.getElementById('input-display').value;
@@ -123,6 +130,7 @@
        }
 
        //remove last character of the input pin
+
        function removeLastChar()
        {
           const numbers = document.getElementById('input-display').value;
@@ -131,6 +139,7 @@
        }
 
        //to clear the input display
+
        function clearDisplay()
        {
         document.getElementById('input-display').value = "";
